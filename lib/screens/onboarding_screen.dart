@@ -340,22 +340,18 @@ Widget _buildLogoScreen() {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.blue.withOpacity(_backlightAnimation.value * 0.8),
+                  color: Colors.white.withOpacity(_backlightAnimation.value * 0.8),
                   blurRadius: 50 * _backlightAnimation.value,
-                  spreadRadius: 20 * _backlightAnimation.value,
+                  spreadRadius: 10 * _backlightAnimation.value,
                 ),
               ],
             ),
             child: Container(
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white,
+                color: Colors.transparent,
               ),
-              child: const Icon(
-                Icons.restaurant_menu,
-                size: 80,
-                color: Colors.blue,
-              ),
+              child:  Image.asset('assets/snapcook.png'),
             ),
           );
         },

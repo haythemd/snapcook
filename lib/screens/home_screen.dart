@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:video_player/video_player.dart';
+import 'package:snapcook/screens/recipe/recipe_detail_screen.dart';
+import 'package:snapcook/screens/recipe/recipes_screen.dart' hide Recipe;
 import 'dart:io';
 import 'dart:async';
 
@@ -42,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             _currentIndex = index;
           });
         },
-        children: const [
-          CameraHomeTab(),
-          RecipesTab(),
-          SavedRecipesTab(),
-          ProfileTab(),
+        children: [
+          const CameraHomeTab(),
+          RecipeListView(),
+          RecipeSingleView(recipe: sampleRecipe),
+          const ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -456,7 +457,7 @@ class _CameraHomeTabState extends State<CameraHomeTab>
                 child: ElevatedButton(
                   onPressed: _submitMedia,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.orange,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -464,7 +465,7 @@ class _CameraHomeTabState extends State<CameraHomeTab>
                     ),
                   ),
                   child: Text(
-                    'Submit ${_capturedMedia.length} ${_capturedMedia.length == 1 ? 'Item' : 'Items'}',
+                    '  Submit  ',
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -505,6 +506,7 @@ class _CameraHomeTabState extends State<CameraHomeTab>
                                 color: _isRecording ? Colors.white : Colors.transparent,
                                 borderRadius: _isRecording ? BorderRadius.circular(4) : null,
                               ),
+                              child: Icon(Icons.camera_alt_outlined),
                             ),
                           ),
                         ),
@@ -642,3 +644,30 @@ class ProfileTab extends StatelessWidget {
     );
   }
 }
+final Recipe sampleRecipe = Recipe(
+  name: "Spaghetti Carbonara",
+  description: "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. This creamy and delicious comfort food is perfect for dinner and will transport you straight to Rome with every bite.",
+  cookingTime: "25 min",
+  difficulty: "Medium",
+  ingredients: [
+    "400g Spaghetti pasta",
+    "200g Pancetta or guanciale, diced",
+    "4 large eggs",
+    "100g Parmesan cheese, grated",
+    "2 cloves garlic, minced",
+    "Fresh black pepper to taste",
+    "Salt for pasta water",
+    "2 tbsp olive oil"
+  ],
+  image: "https://images.unsplash.com/photo-1551892374-ecf8285cf834?w=400",
+  steps: [
+    "Bring a large pot of salted water to boil and cook spaghetti according to package directions until al dente.",
+    "While pasta cooks, heat olive oil in a large skillet over medium heat. Add pancetta and cook until crispy, about 5-7 minutes.",
+    "In a bowl, whisk together eggs, grated Parmesan, and a generous amount of black pepper.",
+    "Reserve 1 cup of pasta cooking water, then drain the pasta.",
+    "Add hot pasta to the skillet with pancetta and toss to combine.",
+    "Remove from heat and quickly stir in the egg mixture, adding pasta water as needed to create a creamy sauce.",
+    "Serve immediately with extra Parmesan and black pepper."
+  ],
+  categories: ["Italian", "Pasta", "Dinner", "Comfort Food"],
+);
